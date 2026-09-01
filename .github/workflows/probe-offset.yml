@@ -1,0 +1,15 @@
+# 어정쩡한 분 슬롯. 위와 같은 리포·같은 조건인데 분만 다르다.
+# 목적: 정각(:00)이 붐벼서 생기는 지연이 얼마나 되는지 잰다.
+name: probe-offset
+
+on:
+  schedule:
+    - cron: "37 0 * * *"    # 09:37 KST
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 실제로 돌기 시작한 시각
+        run: date -u +"started %Y-%m-%dT%H:%M:%SZ (target 00:37Z)"
