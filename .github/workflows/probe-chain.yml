@@ -1,0 +1,16 @@
+# probe-heavy가 끝나면 따라 도는 연쇄 워크플로.
+# release-tracker에서 캘린더가 workflow_run으로 따라 도는 구조를 흉내 낸다.
+# 예약이 아니므로 예약 처리량에는 잡히지 않는다.
+name: probe-chain
+
+on:
+  workflow_run:
+    workflows: ["probe-heavy"]
+    types: [completed]
+
+jobs:
+  chain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 연쇄 실행 시각
+        run: date -u +"chained %Y-%m-%dT%H:%M:%SZ"
